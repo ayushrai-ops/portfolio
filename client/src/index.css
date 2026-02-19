@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-blue: #0ea5e9;
+  --color-brand-purple: #a855f7;
+  --color-root-bg: #070b14;
+  --color-card-bg: rgba(12, 18, 34, 0.85);
+  --font-sans: "Inter", "Outfit", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ── Glass card (no backdrop-filter — lightweight) ───────── */
+@layer utilities {
+  .glass-card {
+    background: rgba(12, 18, 34, 0.85);
+    border: 1px solid rgba(51, 65, 85, 0.4);
+    border-radius: 1rem;
+  }
+}
+
+/* ── Base ──────────────────────────────────────────────────── */
+html {
+  cursor: none;
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: #070b14;
+  color: #f8fafc;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #070b14;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* ── Ripple Button ─────────────────────────────────────────── */
+.ripple-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.25) 0%, transparent 65%);
+  transform: scale(0);
+  opacity: 0;
+  border-radius: inherit;
+  transition: transform 0.45s ease-out, opacity 0.45s ease-out;
+}
+
+.ripple-btn:active::after {
+  transform: scale(2.5);
+  opacity: 0;
+  transition: 0s;
+}
+
+/* ── Gradient Wave ─────────────────────────────────────────── */
+@keyframes gradientWave {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 300% 50%;
+  }
+}
+
+/* ── Mobile: show default cursor, hide snake ───────────────── */
+@media (pointer: coarse) {
+  html {
+    cursor: auto;
+  }
+}
